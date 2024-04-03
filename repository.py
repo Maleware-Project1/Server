@@ -33,3 +33,20 @@ def get_symmetric_key(db: Session, id: str):
     """
     symmetric_key = db.query(models.SymmetricKey).filter(models.SymmetricKey.id == id).first()
     return symmetric_key
+
+def get_symmetric_keys_by_mac_address(db: Session, mac_address: str, limit: int = 100):
+    """
+    Retrieve symmetric keys from the database based on the given MAC address.
+
+    Args:
+        db (Session): The database session object.
+        mac_address (str): The MAC address to filter the symmetric keys.
+        limit (int, optional): The maximum number of symmetric keys to retrieve. Defaults to 100.
+
+    Returns:
+        List[models.SymmetricKey]: A list of symmetric keys matching the MAC address.
+    """
+    # Query the database to retrieve symmetric keys based on the MAC address and limit the results
+    symmetric_keys = db.query(models.SymmetricKey).filter(models.SymmetricKey.mac_address == mac_address).limit(limit).all()
+    return symmetric_keys
+
