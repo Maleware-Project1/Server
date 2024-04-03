@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 import repository, schemas
@@ -54,4 +54,8 @@ def get_symmetric_key(id: str, db:  Session = Depends(get_db)):
     Returns:
         schemas.SymmetricKey: The retrieved symmetric key.
     """
+    db_symmetric_key = repository.get_symmetric_key(db=db, id=id)
+    if db_symmetric_key is None:
+        raise HTTPException(status_code=404, detail="symmetric key not found")
+
     return repository.get_symmetric_key(db=db, id=id)
