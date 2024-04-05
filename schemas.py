@@ -19,7 +19,5 @@ class SymmetricKeyCreate(BaseModel):
 
     Attributes:
         mac_address (str): The MAC address associated with the symmetric key.
-        key (str): The actual key value.
     """
     mac_address: str
-    key: str

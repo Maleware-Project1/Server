@@ -1,5 +1,5 @@
 import uuid
-import models, schemas
+import models, schemas, utils
 
 from sqlalchemy.orm import Session
 
@@ -14,7 +14,8 @@ def create_symmetric_key(db: Session, symmetric_key: schemas.SymmetricKeyCreate)
     Returns:
         models.SymmetricKey: The created symmetric key.
     """
-    db_symmetric_key = models.SymmetricKey(id=str(uuid.uuid1()), mac_address=symmetric_key.mac_address, key=symmetric_key.key)
+    fernet_key = utils.create_Fernet_key().decode("utf-8")
+    db_symmetric_key = models.SymmetricKey(id=str(uuid.uuid1()), mac_address=symmetric_key.mac_address, key=fernet_key)
     db.add(db_symmetric_key)
     db.commit()
     db.refresh(db_symmetric_key)
