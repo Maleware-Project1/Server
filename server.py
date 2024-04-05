@@ -5,7 +5,6 @@ import repository, schemas
 
 from database import SessionLocal, Base, engine
 
-
 # Create the table in the database
 Base.metadata.create_all(bind=engine)
 

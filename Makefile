@@ -12,6 +12,9 @@ server:
 
 install:
 	pip3 install -r requirements.txt
-	
+
+deploy:
+	docker compose up --build
+
 .PHONY: postgres createdb dropdb server
 

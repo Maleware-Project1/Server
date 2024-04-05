@@ -15,4 +15,3 @@ class SymmetricKey(database.Base):
     id = Column(String, primary_key=True)  # Unique identifier for the symmetric key
     mac_address = Column(String)  # MAC address associated with the symmetric key
     key = Column(String)  # Actual symmetric key value
-
